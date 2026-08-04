@@ -1,0 +1,47 @@
+generated: '2026-08-04'
+method: derived
+source: openapi/grin-therapeutics-content-openapi.yml + live probes of https://grintherapeutics.com on 2026-08-04
+note: >-
+  Lifecycle posture for the GRIN Therapeutics Content API. GRIN Therapeutics publishes no versioning
+  policy, no deprecation policy, no SLA, no status page and no API changelog, because it runs no
+  developer program — the surface catalogued here is the site's own CMS content API. Absence is
+  recorded as absence. No StatusPage and no Deprecation pointers are emitted in apis.yml, because
+  neither thing exists; emitting them would credit the provider with operational transparency it does
+  not publish.
+versioning:
+  scheme: uri-path namespace
+  current: wp/v2
+  provider_policy: null
+  docs: null
+  note: >-
+    The version namespace is set by WordPress core, not by GRIN Therapeutics. The site's REST index
+    lists every registered namespace — oembed/1.0, contact-form-7/v1, mailin/v1, wp/v2,
+    wp-site-health/v1, wp-block-editor/v1, wp-abilities/v1 — so a consumer can detect namespace
+    changes by polling /wp-json/. The site reported WordPress 7.0.2 in its generator meta tag on
+    2026-08-04; the platform version, and therefore the contract, moves on WordPress core's release
+    train and outside GRIN Therapeutics' announcement.
+deprecation:
+  policy_url: null
+  sunset_header: false
+  deprecation_header: false
+  note: No Sunset (RFC 8594) or Deprecation header was observed on any response, and no deprecation policy is published.
+deprecated_operations: []
+sla:
+  url: null
+  uptime_target: null
+status_page: null
+status_page_note: status.grintherapeutics.com does not resolve (NXDOMAIN), and no status page is linked from any site page.
+changelog:
+  url: null
+  note: >-
+    No API changelog. The company publishes corporate news at https://grintherapeutics.com/news/, but
+    that page is hand-authored WPBakery markup rather than a dated feed, and the RSS feed at
+    /feed/ carries no items — so even the corporate news is not machine-trackable.
+support:
+  channel: https://grintherapeutics.com/contact/
+  note: General corporate contact forms (patients, clinical research, partnerships, careers, general). No developer support channel.
+observed_freshness:
+  pages_published: 10
+  media_items: 174
+  most_recent_media_observed: '2025-11-12T13:31:02'
+  posts_published: 0

@@ -1,0 +1,100 @@
+generated: '2026-08-04'
+method: probed
+source: live error responses from https://grintherapeutics.com/wp-json/ observed 2026-08-04
+format: wordpress-rest-error
+rfc9457: false
+note: >-
+  The GRIN Therapeutics Content API does not use RFC 9457 problem+json. It returns the WordPress REST
+  error envelope as application/json. Every entry below was observed live against
+  grintherapeutics.com — none is inferred from the WordPress source or from documentation. GRIN
+  Therapeutics publishes no error reference of its own.
+envelope:
+  media_type: application/json
+  fields:
+    code: Machine-readable error slug, stable across WordPress versions.
+    message: Human-readable, localised message.
+    data.status: The HTTP status code, repeated in the body.
+    data.params: Present on validation failures — a map of parameter name to the specific violation.
+    data.details: Present on validation failures — per-parameter {code, message, data} objects.
+problems:
+- status: 400
+  code: rest_invalid_param
+  title: Invalid parameter(s)
+  observed_at: /wp/v2/pages?per_page=500
+  observed_body:
+    code: rest_invalid_param
+    message: 'Invalid parameter(s): per_page'
+    data:
+      status: 400
+      params:
+        per_page: per_page must be between 1 (inclusive) and 100 (inclusive)
+      details:
+        per_page:
+          code: rest_out_of_bounds
+          message: per_page must be between 1 (inclusive) and 100 (inclusive)
+  remediation: >-
+    Read data.params for the offending parameter and data.details[param].code for the specific
+    violation class (rest_out_of_bounds, rest_invalid_type, rest_not_in_enum). Correct the value and
+    retry — the request is deterministic and safe to repeat.
+  source_operation: openapi/grin-therapeutics-content-openapi.yml#listPages
+  applies_to: [listPosts, listPages, listMedia, listCategories, listTags, listUsers, searchContent]
+- status: 404
+  code: rest_post_invalid_id
+  title: Invalid post ID
+  observed_at: /wp/v2/pages/999999
+  observed_body:
+    code: rest_post_invalid_id
+    message: Invalid post ID.
+    data:
+      status: 404
+  remediation: >-
+    The id does not exist, or exists but is not published and therefore invisible to an anonymous
+    caller. Resolve ids from the collection endpoints or from searchContent rather than constructing
+    them.
+  source_operation: openapi/grin-therapeutics-content-openapi.yml#getPage
+  applies_to: [getPost, getPage, getMediaItem]
+- status: 401
+  code: rest_forbidden
+  title: Sorry, you are not allowed to do that.
+  observed_at: /wp/v2/settings, /wp-abilities/v1/abilities, /wp-abilities/v1/categories
+  observed_body:
+    code: rest_forbidden
+    message: Sorry, you are not allowed to do that.
+    data:
+      status: 401
+  remediation: >-
+    The route requires an authenticated principal (application password or cookie+nonce). GRIN
+    Therapeutics does not issue credentials to third parties, so these routes are not reachable by an
+    integrator. Note the status is 401 with no WWW-Authenticate challenge header.
+  gated: true
+- status: 403
+  code: rest_comment_disabled
+  title: Comments are disabled.
+  observed_at: /wp/v2/comments
+  observed_body:
+    code: rest_comment_disabled
+    message: Comments are disabled.
+    data:
+      status: 403
+  remediation: >-
+    Comments are switched off site-wide. This is a permanent condition of the deployment, not a
+    transient failure — do not retry.
+  gated: true
+- status: 403
+  code: wpcf7_forbidden
+  title: You are not allowed to access contact forms.
+  observed_at: /contact-form-7/v1/contact-forms
+  observed_body:
+    code: wpcf7_forbidden
+    message: You are not allowed to access contact forms.
+    data:
+      status: 403
+  remediation: >-
+    The Contact Form 7 namespace is registered but its form listing requires an editor credential.
+    Use the human contact page at https://grintherapeutics.com/contact/ instead.
+  gated: true
+not_observed:
+- status: 429
+  note: No rate-limit response was produced during probing and no rate-limit policy is published.
+- status: 500
+  note: No server error was produced during probing.

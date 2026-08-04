@@ -1,0 +1,63 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for the GRIN Therapeutics Content API
+  version: 1.0.0
+extends: openapi/grin-therapeutics-content-openapi.yml
+x-api-evangelist-note: >-
+  GRIN Therapeutics publishes no OpenAPI. The document this overlay extends is itself an API
+  Evangelist derivation of the WordPress REST route index at https://grintherapeutics.com/wp-json/.
+  This overlay carries the enhancements the enrichment pipeline adds on top of that derivation —
+  provider identity, artifact cross-links and per-tag caveats — so the derived spec stays a faithful
+  projection of the route index and the editorial layer stays separable from it.
+actions:
+- target: $.info
+  update:
+    x-api-evangelist-provider: grin-therapeutics
+    x-api-evangelist-provider-name: GRIN Therapeutics
+    x-api-evangelist-provider-type: clinical-stage biotechnology
+    x-api-evangelist-surface-class: cms-content-api
+    x-api-evangelist-provider-publishes-spec: false
+    x-api-evangelist-harvested: '2026-08-04'
+    x-api-evangelist-artifacts:
+      authentication: authentication/grin-therapeutics-authentication.yml
+      conventions: conventions/grin-therapeutics-conventions.yml
+      errors: errors/grin-therapeutics-problem-types.yml
+      data_model: data-model/grin-therapeutics-data-model.yml
+      conformance: conformance/grin-therapeutics-conformance.yml
+      lifecycle: lifecycle/grin-therapeutics-lifecycle.yml
+      well_known: well-known/grin-therapeutics-well-known.yml
+      domain_security: security/grin-therapeutics-domain-security.yml
+      skills: skills/_index.yml
+- target: $.info
+  update:
+    x-api-evangelist-anonymous-read: true
+    x-api-evangelist-gated-namespaces:
+    - wp-abilities/v1
+    - contact-form-7/v1
+    - mailin/v1
+    - wp-site-health/v1
+    - wp-block-editor/v1
+- target: $.tags[?(@.name=='posts')]
+  update:
+    x-api-evangelist-empty-collection: true
+    x-api-evangelist-note: >-
+      Verified empty on 2026-08-04 (X-WP-Total 0). GRIN Therapeutics' press releases and corporate
+      events live inside the News page (id 6) as WPBakery shortcode markup, so no press release is
+      individually addressable and the /feed/ RSS channel carries no items.
+- target: $.tags[?(@.name=='taxonomy')]
+  update:
+    x-api-evangelist-unused: true
+    x-api-evangelist-note: Every category and tag term reports count 0; the terms present are theme defaults, not GRIN Therapeutics editorial taxonomy.
+- target: $.tags[?(@.name=='pages')]
+  update:
+    x-api-evangelist-note: >-
+      content.rendered returns WPBakery page-builder shortcode markup rather than semantic HTML.
+      Consumers must strip [vc_row]/[vc_column]/css=".vc_custom_..." blocks (and normalise
+      typographic quotes) before the text is usable.
+- target: $.paths['/wp/v2/pages'].get
+  update:
+    x-api-evangelist-primary: true
+    x-api-evangelist-note: The highest-value operation on this surface — the ten pages carry GRIN Therapeutics' science, pipeline, disease-state and patient-resource content.
+- target: $.paths['/wp/v2/media'].get
+  update:
+    x-api-evangelist-note: 174 attachments at harvest time, including the scientific figures used across the Our Science and Disease State pages.

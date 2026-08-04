@@ -42,5 +42,52 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-GRIN Therapeutics is a company surfaced via the API Evangelist harvest backlog (source: secondary-market) and added to the network as a stub for full-pipeline profiling.
-- https://forgeglobal.com/grin-therapeutics_stock/
+GRIN Therapeutics, Inc. is a clinical-stage biotechnology company developing precision therapeutics
+for pediatric neurodevelopmental disorders caused by NMDA receptor dysfunction. It is an affiliate of
+Neurvati Neurosciences, a Blackstone Life Sciences portfolio company. Its lead investigational asset
+is radiprodil, an orally bioavailable selective negative allosteric modulator of the GluN2B subunit
+of the NMDA receptor, in development for GRIN-related neurodevelopmental disorder (GRIN-NDD),
+tuberous sclerosis complex (TSC) and focal cortical dysplasia (FCD) type II.
+
+- Website: https://grintherapeutics.com/
+- Science: https://grintherapeutics.com/our-science/
+- Parent affiliate: https://neurvati.com/
+- Secondary market: https://forgeglobal.com/grin-therapeutics_stock/
+
+## API surface
+
+**GRIN Therapeutics runs no developer program.** It publishes no product API, no developer portal, no
+API documentation, no SDKs, no CLI, no MCP server, no A2A agent card, no status page and no
+`/.well-known/` discovery surface. Contract discovery on 2026-08-04 probed the site root and the
+`api.`, `developer.`, `docs.`, `status.`, `trust.` and `mcp.` subdomains (all NXDOMAIN), every
+`/.well-known/` path (all 404), `/openapi.json`, `/swagger.json`, `/api-docs`, `/graphql` and
+`/llms.txt` (all 404).
+
+The one machine-readable surface reachable without credentials is the **WordPress REST content API**
+at `https://grintherapeutics.com/wp-json` — the corporate site's own content API, not a product. It
+advertises 138 routes across seven namespaces; the anonymously readable subset is modelled in
+`openapi/grin-therapeutics-content-openapi.yml` (19 operations, derived from the live route index and
+verified against live responses). Two things a consumer should know up front: page bodies are
+WPBakery shortcode markup rather than semantic HTML, and the `posts` collection is empty — the press
+releases live inside the News page, so `/feed/` carries no items.
+
+The site also registers the WordPress Abilities API (`wp-abilities/v1`), an agent-facing capability
+registry, but every route under it returns `401 rest_forbidden` to anonymous callers, so no agent
+capability is exposed and none is claimed here.
+
+## Artifacts
+
+| Path | What it holds |
+|---|---|
+| `openapi/` | OpenAPI 3.1 derived from the live WordPress REST route index |
+| `overlays/` | API Evangelist enhancements layered over the derived spec |
+| `authentication/` | Anonymous read; application passwords and cookie+nonce gate the rest |
+| `conventions/` | Pagination, field selection, embedding, caching, error envelope |
+| `errors/` | Live-observed error responses (not RFC 9457) |
+| `data-model/` | Entity-relationship graph across pages, media, terms and users |
+| `conformance/` | Standards this surface does and does not meet |
+| `lifecycle/` | Recorded absence of versioning policy, deprecation policy, SLA and status page |
+| `well-known/` | Every `/.well-known/` path probed, all 404 |
+| `security/` | TLS/HSTS/DNSSEC/CAA/SPF/DMARC probe results |
+| `llms/` | Generated `llms.txt` for the provider |
+| `skills/` | Packaged agent operating instructions for the content API |

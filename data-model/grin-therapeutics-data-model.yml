@@ -1,0 +1,138 @@
+generated: '2026-08-04'
+method: derived
+source: openapi/grin-therapeutics-content-openapi.yml + live responses from https://grintherapeutics.com/wp-json/
+note: >-
+  Entity-relationship graph for the GRIN Therapeutics Content API, derived from the OpenAPI component
+  schemas, the id-reference fields on each resource, and the `_links` relations observed on live
+  responses. Ids are bare integers — this API uses no prefixed or typed identifiers, and post, page
+  and attachment ids share a single sequence because WordPress stores all three in one table, so an
+  id alone does not identify its type.
+identifiers:
+  scheme: integer
+  shared_sequence: true
+  detail: >-
+    post, page and attachment ids are drawn from one sequence. Observed values: pages 6-13039, media
+    up to 12501, users 5. Term ids (categories, tags) are a separate sequence.
+entities:
+- name: Page
+  rest_base: pages
+  operations: [listPages, getPage]
+  population: 10
+  hierarchical: true
+  description: >-
+    The substantive content of the site. The ten published pages are Home (11), News (6), Careers
+    (9554), Working with Grin Therapeutics / contact (5750), Privacy Policy (9935), About GRIN
+    Therapeutics (11950), Our Science (11956), Disease State (11958), Resources for patients and
+    caregivers (11960) and Cookie Policy (13039).
+- name: Post
+  rest_base: posts
+  operations: [listPosts, getPost]
+  population: 0
+  description: >-
+    Registered and reachable but empty. GRIN Therapeutics' news items and corporate events are
+    authored inside the News page (id 6) rather than as posts, so there is no per-press-release
+    resource, no dated archive and no populated feed.
+- name: MediaItem
+  rest_base: media
+  operations: [listMedia, getMediaItem]
+  population: 174
+  description: >-
+    The media library — scientific figures (e.g. NMDA_Receptor_Scaled.png), corporate imagery and
+    logos. This is the richest addressable collection on the API.
+- name: Term
+  rest_base: categories, tags
+  operations: [listCategories, getCategory, listTags, getTag]
+  description: >-
+    WordPress core taxonomy terms. Present but unused — every term returns count 0 because there are
+    no posts. Category terms observed include Business; tag terms observed include Creative. These
+    are theme defaults, not GRIN Therapeutics' editorial taxonomy.
+- name: User
+  rest_base: users
+  operations: [listUsers, getUser]
+  description: Public author records. Agency accounts rather than named GRIN Therapeutics staff (e.g. cglife, bencrossroad-us).
+- name: PostType
+  rest_base: types
+  operations: [listTypes, getType]
+  description: >-
+    Registry of registered post types — post, page, attachment, nav_menu_item, wp_block,
+    wp_template, wp_template_part, wp_global_styles, wp_navigation, wp_font_family, wp_font_face. No
+    custom post type is registered, which is why the press releases have no home.
+- name: Taxonomy
+  rest_base: taxonomies
+  operations: [listTaxonomies]
+  description: Registry of registered taxonomies — category and post_tag only.
+- name: SearchResult
+  rest_base: search
+  operations: [searchContent]
+  description: A projection, not a stored entity — {id, title, url, type, subtype} pointing back at a Page or Post.
+relationships:
+- from: Post
+  to: User
+  kind: belongs_to
+  via: author
+  resolves_with: getUser
+- from: Post
+  to: MediaItem
+  kind: has_one
+  via: featured_media
+  resolves_with: getMediaItem
+- from: Post
+  to: Term
+  kind: has_many
+  via: categories
+  resolves_with: getCategory
+- from: Post
+  to: Term
+  kind: has_many
+  via: tags
+  resolves_with: getTag
+- from: Page
+  to: User
+  kind: belongs_to
+  via: author
+  resolves_with: getUser
+- from: Page
+  to: MediaItem
+  kind: has_one
+  via: featured_media
+  resolves_with: getMediaItem
+- from: Page
+  to: Page
+  kind: belongs_to
+  via: parent
+  resolves_with: getPage
+  note: Pages are hierarchical; every published page on this site has parent 0 (no nesting in use).
+- from: MediaItem
+  to: Page
+  kind: belongs_to
+  via: post
+  resolves_with: getPage
+  note: Nullable — most attachments on this site are unattached.
+- from: MediaItem
+  to: User
+  kind: belongs_to
+  via: author
+  resolves_with: getUser
+- from: Term
+  to: Term
+  kind: belongs_to
+  via: parent
+  resolves_with: getCategory
+  note: Categories are hierarchical; tags are flat and carry no parent.
+- from: PostType
+  to: Taxonomy
+  kind: has_many
+  via: taxonomies
+  resolves_with: listTaxonomies
+- from: SearchResult
+  to: Page
+  kind: belongs_to
+  via: id
+  resolves_with: getPage
+  note: type=post + subtype=page indicates the target collection.
+traversal:
+  mechanism: _links
+  description: >-
+    Every resource carries a `_links` object with self, collection, about, author, wp:attachment,
+    wp:term and curies relations, so the graph above is walkable at runtime without hard-coding
+    routes. Passing `_embed` inlines the linked author, featured media and terms under `_embedded`.

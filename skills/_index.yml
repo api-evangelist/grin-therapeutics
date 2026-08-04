@@ -1,0 +1,38 @@
+generated: '2026-08-04'
+method: generated
+source: openapi/grin-therapeutics-content-openapi.yml
+note: >-
+  GRIN Therapeutics publishes no AGENTS.md and no skill files of its own — these are API Evangelist
+  packaged operating instructions for the one machine-readable surface it does expose, the anonymous
+  WordPress REST content API behind grintherapeutics.com. Every operationId referenced below exists
+  verbatim in the OpenAPI in this repo. There is no product API, so there are no product flows to
+  package; the skills cover reading content, searching it, and harvesting the media library, together
+  with the two traps a naive consumer falls into on this site — WPBakery shortcode markup in page
+  bodies, and an empty posts collection where the press releases appear to be.
+api: grin-therapeutics:grin-therapeutics-content-api
+skills:
+- file: grin-therapeutics-read-corporate-content.md
+  name: Read GRIN Therapeutics corporate and science content
+  description: >-
+    Retrieve the ten published pages — About, Our Science, Disease State, patient resources, News,
+    Careers, Contact, Privacy, Cookie Policy — and clean the WPBakery shortcode markup out of
+    content.rendered so the prose is usable. Covers the News caveat: press releases live inside one
+    page, not as posts.
+  api: openapi/grin-therapeutics-content-openapi.yml
+  operations: [listPages, getPage, listTypes]
+- file: grin-therapeutics-search-and-resolve.md
+  name: Search GRIN Therapeutics content and resolve results to full records
+  description: >-
+    Use cross-content search to find material by term (radiprodil, GRIN-NDD, Beeline, Astroscape),
+    route on the result `subtype`, and resolve each lightweight hit into the full page record plus its
+    author and attached media.
+  api: openapi/grin-therapeutics-content-openapi.yml
+  operations: [searchContent, getPage, getUser, listTaxonomies]
+- file: grin-therapeutics-harvest-media-library.md
+  name: Harvest the GRIN Therapeutics media library
+  description: >-
+    Page through the 174-item media library to retrieve scientific figures, corporate imagery and
+    logos with source URLs, MIME types, alt text and pre-rendered size variants, including how to run
+    an incremental harvest with modified_after.
+  api: openapi/grin-therapeutics-content-openapi.yml
+  operations: [listMedia, getMediaItem, getPage]

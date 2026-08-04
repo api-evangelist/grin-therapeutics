@@ -1,0 +1,54 @@
+generated: '2026-08-04'
+method: probed
+source: live HTTP probes of https://grintherapeutics.com/.well-known/* on 2026-08-04
+host: https://grintherapeutics.com
+note: >-
+  GRIN Therapeutics publishes no /.well-known/ discovery surface. Every path below returned HTTP 404
+  with the site's HTML 404 page (Content-Type text/html, 94,614 bytes) rather than a document, so
+  there are no false positives from an SPA catch-all — this deployment returns a real 404 status.
+  There is no security.txt (RFC 9116), no OpenID Connect or OAuth authorization-server metadata, no
+  RFC 9727 api-catalog, no ai-plugin.json, and no A2A agent card at either the canonical
+  /.well-known/agent-card.json or the legacy /.well-known/agent.json path. Recorded absence is valid
+  data: no a2a/ artifact is written, because an agent card may only ever be harvested from the
+  provider's own host, never authored on its behalf.
+documents:
+- path: /.well-known/security.txt
+  spec: RFC 9116
+  status: 404
+- path: /.well-known/openid-configuration
+  spec: OpenID Connect Discovery 1.0
+  status: 404
+- path: /.well-known/oauth-authorization-server
+  spec: RFC 8414
+  status: 404
+- path: /.well-known/api-catalog
+  spec: RFC 9727
+  status: 404
+- path: /.well-known/ai-plugin.json
+  spec: OpenAI plugin manifest
+  status: 404
+- path: /.well-known/agent-card.json
+  spec: A2A 1.0.0 Agent Card
+  status: 404
+- path: /.well-known/agent.json
+  spec: A2A pre-0.3 legacy Agent Card
+  status: 404
+other_discovery:
+- path: /robots.txt
+  status: 200
+  note: 'Disallows /wp-admin/ only; declares Sitemap https://grintherapeutics.com/wp-sitemap.xml. No AI/agent user-agent directives.'
+- path: /wp-sitemap.xml
+  status: 200
+  note: Core WordPress sitemap index; a single child sitemap wp-sitemap-posts-page-1.xml covering the 10 pages.
+- path: /feed/
+  status: 200
+  content_type: application/rss+xml
+  note: RSS 2.0 channel for the site. Registered and valid, but carries no items because the posts collection is empty.
+- path: /wp-json/
+  status: 200
+  content_type: application/json
+  note: >-
+    The WordPress REST API index — the one machine-readable discovery document this provider does
+    publish. Advertises 138 routes across 7 namespaces and the application-passwords authentication
+    method. Also advertised via a Link header (rel="https://api.w.org/") on every HTML response.
+    Modelled in openapi/grin-therapeutics-content-openapi.yml.

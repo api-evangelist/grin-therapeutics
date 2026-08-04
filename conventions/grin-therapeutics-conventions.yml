@@ -1,0 +1,92 @@
+generated: '2026-08-04'
+method: derived
+source: openapi/grin-therapeutics-content-openapi.yml + live response headers observed 2026-08-04
+note: >-
+  Cross-cutting request/response semantics for the GRIN Therapeutics Content API. These are
+  WordPress core REST conventions, verified against live responses from grintherapeutics.com — GRIN
+  Therapeutics publishes no conventions documentation of its own. No idempotency contract exists on
+  this surface (the anonymous surface is read-only and the write surface is credential-gated and
+  undocumented), so no Idempotency pointer is emitted in apis.yml.
+authentication:
+  style: anonymous read; HTTP Basic application passwords or cookie+X-WP-Nonce for write
+  detail: authentication/grin-therapeutics-authentication.yml
+idempotency:
+  supported: false
+  header: null
+  note: >-
+    No Idempotency-Key header, parameter or documented replay contract. The anonymously reachable
+    surface is GET-only (the Allow response header on the collections reads exactly 'GET'), so
+    idempotency is a property of the HTTP method rather than a provider contract.
+pagination:
+  style: page-number
+  params:
+    page: 1-indexed page number, default 1
+    per_page: 'items per page, default 10, min 1, max 100 — out-of-range returns 400 rest_invalid_param with code rest_out_of_bounds'
+    offset: absolute row offset, available on posts/pages/media/tags/users, overrides page when set
+  response_headers:
+    X-WP-Total: total matching records across all pages
+    X-WP-TotalPages: total number of pages at the current per_page
+    Link: RFC 8288 Link header carrying rel="next" and rel="prev"
+  cors_note: >-
+    Access-Control-Expose-Headers is set to 'X-WP-Total, X-WP-TotalPages, Link', so browser clients
+    can read the pagination signals cross-origin.
+  observed:
+    pages: 'X-WP-Total 10, X-WP-TotalPages 1'
+    media: 'X-WP-Total 174, X-WP-TotalPages 174 at per_page=1'
+    posts: 'empty array — the collection is registered but carries no items'
+field_selection:
+  supported: true
+  param: _fields
+  description: >-
+    Comma-separated allowlist of top-level response fields, applied to both collection and single
+    responses. Verified live with
+    /wp/v2/pages?per_page=100&_fields=id,slug,title,link, which returned exactly those four keys.
+  embedding:
+    param: _embed
+    description: Inlines linked resources (author, featured media, terms) under an _embedded key, following the _links relations on every object.
+filtering:
+  search: '`search` free-text on posts/pages/media/categories/tags/users; `search_columns` narrows the columns matched; `search_semantics=exact` forces exact matching.'
+  date_windows: 'after / before on published date and modified_after / modified_before on modified date, all ISO 8601.'
+  identity: 'include / exclude take arrays of ids; slug takes an array of slugs.'
+  ordering: '`order` (asc|desc, default desc) plus a per-collection `orderby` enum.'
+  cross_content: '/wp/v2/search returns lightweight {id,title,url,type,subtype} results across every searchable type, filterable by type and subtype.'
+metadata:
+  supported: partial
+  note: Terms and users expose a `meta` array; it is empty on this deployment. No custom fields are exposed to anonymous callers.
+hypermedia:
+  supported: true
+  style: HAL-like `_links` object on every resource, with `self`, `collection`, `about`, `author`, `wp:attachment`, `wp:term` and `curies` relations.
+  discovery: >-
+    Every HTML response carries Link: <https://grintherapeutics.com/wp-json/>; rel="https://api.w.org/",
+    which is how the API root is meant to be discovered from the site.
+request_tracing:
+  request_id_header: null
+  note: No request-id, correlation-id or trace header is returned. Fastly cache headers (X-Served-By, X-Cache, X-Cache-Hits) are the only per-request diagnostics.
+versioning:
+  scheme: uri-path namespace
+  current: wp/v2
+  note: >-
+    The namespace is fixed by WordPress core, not by GRIN Therapeutics. The site index lists all
+    registered namespaces at /wp-json/. See lifecycle/grin-therapeutics-lifecycle.yml.
+error_envelope:
+  media_type: application/json
+  rfc9457: false
+  shape: '{code: string, message: string, data: {status: int, params?: object, details?: object}}'
+  detail: errors/grin-therapeutics-problem-types.yml
+rate_limiting:
+  documented: false
+  headers: []
+  note: >-
+    No RateLimit, X-RateLimit or Retry-After headers were observed on any response, and no rate-limit
+    policy is published. Absence of a signal is recorded, not assumed to mean unlimited.
+caching:
+  cache_control: 'public, max-age=604800 observed on wp/v2 collection responses (7 days)'
+  cdn: Fastly
+  conditional_requests: 'No ETag or Last-Modified header observed on the JSON responses, so conditional GET is not available.'
+robots:
+  note: 'JSON responses carry x-robots-tag: noindex.'
+content_caveat: >-
+  Page bodies are returned as WPBakery page-builder shortcode markup ([vc_row], [vc_column], inline
+  css=".vc_custom_..." blocks) inside content.rendered rather than clean semantic HTML, and the
+  shortcodes use typographic quotes. Any consumer reading page content must strip shortcodes before
+  the text is usable.

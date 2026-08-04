@@ -1,0 +1,35 @@
+generated: '2026-08-04'
+method: probed
+source: live DNS/TLS/HTTP probes of the grintherapeutics.com host and registrable domain
+note: >-
+  Probed 2026-08-04 by the API Evangelist enrichment pipeline. Only GRIN Therapeutics' own host and
+  registrable domain are recorded. The apis.yml humanURL for the content API points at
+  developer.wordpress.org (the upstream WordPress REST handbook that documents the wp/v2 contract);
+  that host is not operated by GRIN Therapeutics and its posture is deliberately excluded so it is
+  not misattributed to this provider. HSTS is present but the max-age is 300 seconds — three orders
+  of magnitude below the one-year value HSTS preload requires — with no includeSubDomains and no
+  preload directive, so it provides only nominal downgrade protection. No CAA records and no DNSSEC
+  are published.
+hosts:
+- host: grintherapeutics.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Oct 14 07:52:08 2026 GMT
+  hsts: true
+  hsts_max_age: 300
+  hsts_include_subdomains: false
+  hsts_preload: false
+  server: nginx
+  cdn: Fastly (X-Served-By / X-Cache response headers observed)
+domains:
+- domain: grintherapeutics.com
+  dnssec: false
+  caa: []
+  spf: true
+  dmarc: true
+  dmarc_policy: quarantine
+observations:
+- No Content-Security-Policy header on the site root.
+- No X-Content-Type-Options, X-Frame-Options, Referrer-Policy or Permissions-Policy header on the site root.
+- No /.well-known/security.txt (RFC 9116) published — see well-known/grin-therapeutics-well-known.yml.
+- No api., developer., docs., status., trust. or mcp. subdomain resolves for grintherapeutics.com (NXDOMAIN on all six).
