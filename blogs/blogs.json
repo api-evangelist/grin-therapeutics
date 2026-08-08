@@ -1,0 +1,14 @@
+{
+  "repo": "grin-therapeutics",
+  "feeds": [
+    {
+      "source": "https://grintherapeutics.com/news/",
+      "feed_url": "https://grintherapeutics.com/feed/",
+      "title": "",
+      "saved": 0,
+      "method": "discovered"
+    }
+  ],
+  "post_count": 0,
+  "fetched": "2026-08-06T14:08:46Z"
+}
