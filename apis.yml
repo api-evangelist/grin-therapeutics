@@ -30,6 +30,18 @@ created: '2026-08-04'
 modified: '2026-08-04'
 tags:
 - Company
+- Biotechnology
+- Pharmaceuticals
+- Neuroscience
+- Rare Disease
+- Precision Medicine
+- Clinical Trials
+- Pediatrics
+- Epilepsy
+- Life Sciences
+- content-api
+tags_raw:
+- Company
 - biotechnology
 - pharmaceuticals
 - neuroscience
@@ -47,6 +59,8 @@ apis:
   humanURL: https://developer.wordpress.org/rest-api/
   baseURL: https://grintherapeutics.com/wp-json
   tags:
+  - Discovery
+  tags_raw:
   - discovery
   properties:
   - type: OpenAPI
@@ -65,6 +79,8 @@ apis:
   humanURL: https://developer.wordpress.org/rest-api/
   baseURL: https://grintherapeutics.com/wp-json
   tags:
+  - Media
+  tags_raw:
   - media
   properties:
   - type: OpenAPI
@@ -83,6 +99,8 @@ apis:
   humanURL: https://developer.wordpress.org/rest-api/
   baseURL: https://grintherapeutics.com/wp-json
   tags:
+  - oEmbed
+  tags_raw:
   - oembed
   properties:
   - type: OpenAPI
@@ -101,6 +119,8 @@ apis:
   humanURL: https://developer.wordpress.org/rest-api/
   baseURL: https://grintherapeutics.com/wp-json
   tags:
+  - Pages
+  tags_raw:
   - pages
   properties:
   - type: OpenAPI
@@ -121,6 +141,8 @@ apis:
   humanURL: https://developer.wordpress.org/rest-api/
   baseURL: https://grintherapeutics.com/wp-json
   tags:
+  - Posts
+  tags_raw:
   - posts
   properties:
   - type: OpenAPI
@@ -139,6 +161,8 @@ apis:
   humanURL: https://developer.wordpress.org/rest-api/
   baseURL: https://grintherapeutics.com/wp-json
   tags:
+  - Search
+  tags_raw:
   - search
   properties:
   - type: OpenAPI
@@ -158,6 +182,8 @@ apis:
   humanURL: https://developer.wordpress.org/rest-api/
   baseURL: https://grintherapeutics.com/wp-json
   tags:
+  - Taxonomy
+  tags_raw:
   - taxonomy
   properties:
   - type: OpenAPI
@@ -176,6 +202,8 @@ apis:
   humanURL: https://developer.wordpress.org/rest-api/
   baseURL: https://grintherapeutics.com/wp-json
   tags:
+  - User
+  tags_raw:
   - users
   properties:
   - type: OpenAPI
