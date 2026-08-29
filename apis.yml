@@ -19,6 +19,17 @@ description: >-
   runs no developer program and publishes no product API, no developer portal and no API
   documentation; the only machine-readable surface reachable without credentials is the WordPress
   REST content API behind grintherapeutics.com, catalogued here.
+deliveryModel:
+  model: unknown
+  open_source: false
+  commercial: false
+  callable_host: true
+  label: Delivery model not determined — needs a product licence on record
+  confidence: low
+  source:
+  - openapi
+  generated: '2026-08-28'
+  method: derived
 image: https://grintherapeutics.com/wp-content/uploads/2023/11/neurvati_grin_inline_fullcolor_rgb_6in@72ppi.png
 url: https://raw.githubusercontent.com/api-evangelist/grin-therapeutics/refs/heads/main/apis.yml
 x-type: company
