@@ -117,26 +117,6 @@ apis:
     url: conventions/grin-therapeutics-conventions.yml
   - type: DataModel
     url: data-model/grin-therapeutics-data-model.yml
-- aid: grin-therapeutics:grin-therapeutics-oembed-api
-  name: GRIN Therapeutics Oembed API
-  description: oEmbed 1.0 provider endpoint for grintherapeutics.com URLs.
-  humanURL: https://developer.wordpress.org/rest-api/
-  baseURL: https://grintherapeutics.com/wp-json
-  tags:
-  - oEmbed
-  tags_raw:
-  - oembed
-  properties:
-  - type: OpenAPI
-    url: openapi/grin-therapeutics-oembed-api-openapi.yml
-  - type: Authentication
-    url: authentication/grin-therapeutics-authentication.yml
-  - type: ErrorCatalog
-    url: errors/grin-therapeutics-problem-types.yml
-  - type: Conventions
-    url: conventions/grin-therapeutics-conventions.yml
-  - type: DataModel
-    url: data-model/grin-therapeutics-data-model.yml
 - aid: grin-therapeutics:grin-therapeutics-pages-api
   name: GRIN Therapeutics Pages API
   description: Corporate and clinical-programme pages (10 published at harvest time).
@@ -232,6 +212,24 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/grin-therapeutics-users-api-openapi.yml
+  - type: Authentication
+    url: authentication/grin-therapeutics-authentication.yml
+  - type: ErrorCatalog
+    url: errors/grin-therapeutics-problem-types.yml
+  - type: Conventions
+    url: conventions/grin-therapeutics-conventions.yml
+  - type: DataModel
+    url: data-model/grin-therapeutics-data-model.yml
+- aid: grin-therapeutics:grin-therapeutics-o-embed-api
+  name: GRIN Therapeutics o Embed API
+  description: oEmbed 1.0 provider endpoint for grintherapeutics.com URLs.
+  humanURL: https://developer.wordpress.org/rest-api/
+  baseURL: https://grintherapeutics.com/wp-json
+  tags:
+  - o Embed
+  properties:
+  - type: OpenAPI
+    url: openapi/grin-therapeutics-o-embed-api-openapi.yml
   - type: Authentication
     url: authentication/grin-therapeutics-authentication.yml
   - type: ErrorCatalog
