@@ -1,14 +1,7 @@
 {
   "provider": "grin-therapeutics",
   "sources": [
-    "grin-therapeutics-discovery-api-openapi.yml",
-    "grin-therapeutics-media-api-openapi.yml",
-    "grin-therapeutics-oembed-api-openapi.yml",
-    "grin-therapeutics-pages-api-openapi.yml",
-    "grin-therapeutics-posts-api-openapi.yml",
-    "grin-therapeutics-search-api-openapi.yml",
-    "grin-therapeutics-taxonomy-api-openapi.yml",
-    "grin-therapeutics-users-api-openapi.yml"
+    "_original/grin-therapeutics-content-openapi.yml"
   ],
   "outputs": [
     "grin-therapeutics-discovery-api-openapi.yml",
@@ -20,19 +13,25 @@
     "grin-therapeutics-taxonomy-api-openapi.yml",
     "grin-therapeutics-users-api-openapi.yml"
   ],
-  "archived": [],
+  "archived": [
+    "deleted 1 superseded output(s) from the previous generation"
+  ],
   "errors": [],
   "warnings": [],
   "notes": [
-    "grin-therapeutics-discovery-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "grin-therapeutics-media-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "grin-therapeutics-oembed-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "grin-therapeutics-pages-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "grin-therapeutics-posts-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "grin-therapeutics-search-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "grin-therapeutics-taxonomy-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "grin-therapeutics-users-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "apis.yml register: already-registered"
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "grin-therapeutics-content-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "superseded outputs removed: grin-therapeutics-o-embed-api-openapi.yml",
+    "apis.yml register: written (+1 apis, 8 total)"
   ],
-  "skipped": []
+  "skipped": [
+    "grin-therapeutics-discovery-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "grin-therapeutics-media-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "grin-therapeutics-o-embed-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "grin-therapeutics-pages-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "grin-therapeutics-posts-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "grin-therapeutics-search-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "grin-therapeutics-taxonomy-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "grin-therapeutics-users-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
