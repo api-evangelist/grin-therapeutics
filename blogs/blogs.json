@@ -2,20 +2,20 @@
   "repo": "grin-therapeutics",
   "feeds": [
     {
-      "source": "https://grintherapeutics.com/news/",
-      "feed_url": "https://grintherapeutics.com/news/",
-      "title": "",
-      "saved": 0,
-      "method": "none"
-    },
-    {
       "source": "https://grintherapeutics.com/feed/",
       "feed_url": "https://grintherapeutics.com/feed/",
       "title": "",
       "saved": 0,
       "method": "feed"
+    },
+    {
+      "source": "https://grintherapeutics.com/news/",
+      "feed_url": "https://grintherapeutics.com/news/",
+      "title": "",
+      "saved": 0,
+      "method": "none"
     }
   ],
   "post_count": 0,
-  "fetched": "2026-10-03T12:30:02Z"
+  "fetched": "2026-10-10T13:15:00Z"
 }
