@@ -64,52 +64,105 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-GRIN Therapeutics, Inc. is a clinical-stage biotechnology company developing precision therapeutics
-for pediatric neurodevelopmental disorders caused by NMDA receptor dysfunction. It is an affiliate of
-Neurvati Neurosciences, a Blackstone Life Sciences portfolio company. Its lead investigational asset
-is radiprodil, an orally bioavailable selective negative allosteric modulator of the GluN2B subunit
-of the NMDA receptor, in development for GRIN-related neurodevelopmental disorder (GRIN-NDD),
-tuberous sclerosis complex (TSC) and focal cortical dysplasia (FCD) type II.
+GRIN Therapeutics, Inc. is a clinical-stage biotechnology company dedicated to the research and development of precision therapeutics for pediatric neurodevelopmental disorders caused by NMDA receptor dysfunction. It is an affiliate of Neurvati Neurosciences, a Blackstone Life Sciences portfolio company, and traces its founding to Dr. Pierandrea Muglia's attendance at the 2019 CFERV Conference on GRIN Variants at Emory University. Its lead investigational asset is radiprodil, an orally bioavailable selective negative allosteric modulator of the GluN2B subunit of the NMDA receptor, designed to fine-tune dysregulated receptor activity rather than fully block the channel. Radiprodil is in development for GRIN-related neurodevelopmental disorder (GRIN-NDD) arising from gain-of-function variants in GRIN1, GRIN2A, GRIN2B and GRIN2D, and for tuberous sclerosis complex (TSC) and focal cortical dysplasia (FCD) type II. The clinical programme comprises the completed Phase 1b/2a Honeycomb trial, the enrolling global Phase 3 Beeline registrational trial, the Phase 1b/2a Astroscape trial in TSC and FCD type II, and a GRIN-NDD natural history study; radiprodil carries FDA Breakthrough Therapy, Orphan Drug and Rare Pediatric Disease designations and EMA PRIME and Orphan Drug designations. In May 2025 GRIN Therapeutics entered an exclusive collaboration with Angelini Pharma to develop and commercialise radiprodil outside North America. GRIN Therapeutics runs no developer program and publishes no product API, no developer portal and no API documentation; the only machine-readable surface reachable without credentials is the WordPress REST content API behind grintherapeutics.com, catalogued here.
 
-- Website: https://grintherapeutics.com/
-- Science: https://grintherapeutics.com/our-science/
-- Parent affiliate: https://neurvati.com/
-- Secondary market: https://forgeglobal.com/grin-therapeutics_stock/
+**Areas:** Company · Biotechnology · Pharmaceuticals · Neuroscience · Rare Disease · Precision Medicine · Clinical Trials · Pediatrics · Epilepsy · Life Sciences · content-api
 
-## API surface
+## GRIN Therapeutics on APIs.io
 
-**GRIN Therapeutics runs no developer program.** It publishes no product API, no developer portal, no
-API documentation, no SDKs, no CLI, no MCP server, no A2A agent card, no status page and no
-`/.well-known/` discovery surface. Contract discovery on 2026-08-04 probed the site root and the
-`api.`, `developer.`, `docs.`, `status.`, `trust.` and `mcp.` subdomains (all NXDOMAIN), every
-`/.well-known/` path (all 404), `/openapi.json`, `/swagger.json`, `/api-docs`, `/graphql` and
-`/llms.txt` (all 404).
+Everything profiled for GRIN Therapeutics is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/grin-therapeutics/](https://apis.io/providers/grin-therapeutics/)** — or go straight to one of the APIs or properties below.
 
-The one machine-readable surface reachable without credentials is the **WordPress REST content API**
-at `https://grintherapeutics.com/wp-json` — the corporate site's own content API, not a product. It
-advertises 138 routes across seven namespaces; the anonymously readable subset is modelled in
-`openapi/grin-therapeutics-content-openapi.yml` (19 operations, derived from the live route index and
-verified against live responses). Two things a consumer should know up front: page bodies are
-WPBakery shortcode markup rather than semantic HTML, and the `posts` collection is empty — the press
-releases live inside the News page, so `/feed/` carries no items.
+### APIs (1)
 
-The site also registers the WordPress Abilities API (`wp-abilities/v1`), an agent-facing capability
-registry, but every route under it returns `401 rest_forbidden` to anonymous callers, so no agent
-capability is exposed and none is claimed here.
+- [GRIN Therapeutics Website (WordPress REST)](https://apis.io/apis/grin-therapeutics/grintherapeutics-com-website-wordpress-rest/) — The public WordPress REST API (wp-json) of the GRIN Therapeutics website at grintherapeutics.com: the route index of the site's content management system,…
 
-## Artifacts
+### Published properties
 
-| Path | What it holds |
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### Collections (8)
+
+Postman and Open Collection request collections.
+
+- [Moved to /providers/grin-therapeutics/](https://apis.io/collections/grin-therapeutics/open-grin-therapeutics-discovery-api/)
+- [Moved to /providers/grin-therapeutics/](https://apis.io/collections/grin-therapeutics/open-grin-therapeutics-media-api/)
+- [Moved to /providers/grin-therapeutics/](https://apis.io/collections/grin-therapeutics/open-grin-therapeutics-oembed-api/)
+- [Moved to /providers/grin-therapeutics/](https://apis.io/collections/grin-therapeutics/open-grin-therapeutics-pages-api/)
+- [Moved to /providers/grin-therapeutics/](https://apis.io/collections/grin-therapeutics/open-grin-therapeutics-posts-api/)
+- [Moved to /providers/grin-therapeutics/](https://apis.io/collections/grin-therapeutics/open-grin-therapeutics-search-api/)
+- [Moved to /providers/grin-therapeutics/](https://apis.io/collections/grin-therapeutics/open-grin-therapeutics-taxonomy-api/)
+- [Moved to /providers/grin-therapeutics/](https://apis.io/collections/grin-therapeutics/open-grin-therapeutics-users-api/)
+
+#### Overlays (1)
+
+OpenAPI overlays, including conversational phrasing for each operation.
+
+- [Grin Therapeutics Content Overlay](https://apis.io/overlays/grin-therapeutics/grin-therapeutics-content-overlay/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Grin Therapeutics Authentication](https://apis.io/security/grin-therapeutics/grin-therapeutics-authentication/)
+- [Grin Therapeutics Domain Security](https://apis.io/security/grin-therapeutics/grin-therapeutics-domain-security/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://grintherapeutics.com/)
+- [Support](https://grintherapeutics.com/contact/)
+- [Privacy policy](https://grintherapeutics.com/privacy/)
+
+## API Evangelist rating
+
+**Kin Score 14.7** — emerging · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
 |---|---|
-| `openapi/` | OpenAPI 3.1 derived from the live WordPress REST route index |
-| `overlays/` | API Evangelist enhancements layered over the derived spec |
-| `authentication/` | Anonymous read; application passwords and cookie+nonce gate the rest |
-| `conventions/` | Pagination, field selection, embedding, caching, error envelope |
-| `errors/` | Live-observed error responses (not RFC 9457) |
-| `data-model/` | Entity-relationship graph across pages, media, terms and users |
-| `conformance/` | Standards this surface does and does not meet |
-| `lifecycle/` | Recorded absence of versioning policy, deprecation policy, SLA and status page |
-| `well-known/` | Every `/.well-known/` path probed, all 404 |
-| `security/` | TLS/HSTS/DNSSEC/CAA/SPF/DMARC probe results |
-| `llms/` | Generated `llms.txt` for the provider |
-| `skills/` | Packaged agent operating instructions for the content API |
+| Discoverability | 58.0 |
+| Contract quality | 0.0 |
+| Contract governance | 4.5 |
+| Operational transparency | 0.0 |
+| Developer ergonomics | 28.0 |
+| Access clarity | 10.5 |
+
+**Agent readiness 6.3** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | — |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | documented (partial credit) |
+| OpenAPI Examples | — |
+| Rate Limit Signal | — |
+| Event Surface Described | — |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 16.4** — Health
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/grin-therapeutics/](https://apis.io/providers/grin-therapeutics/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for GRIN Therapeutics: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/grin-therapeutics/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
